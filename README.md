@@ -39,7 +39,7 @@ The extension popup provides a simple search box and displays the meaning, word 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/multilang-dictionary-extension.git
+git clone https://github.com/Aryan1771/multilang-dictionary-extension.git
 cd multilang-dictionary-extension
 ```
 
@@ -49,16 +49,10 @@ cd multilang-dictionary-extension
 pip install -r requirements.txt
 ```
 
-### 3. Run the Python Backend
+### 3. Run the Python
 
 ```bash
-python backend/app.py
-```
-
-By default, the backend may run on:
-
-```text
-http://localhost:5000
+python server/app.py
 ```
 
 Update the API URL in the JavaScript files if your backend uses a different port.
@@ -156,4 +150,4 @@ This project is licensed under the GNU GPL v3.0 License.
 
 ## Author
 
-Created by **SpaceWarpDrive7**.
+Created by **Aryan1771**.
