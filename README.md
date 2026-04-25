@@ -8,7 +8,7 @@ A lightweight **multilingual dictionary browser extension** built with **Python,
 
 The extension popup provides a simple search box and displays the meaning, word type, and examples.
 
-![Dictionary Search Popup](./icon128.png)
+![Dictionary Search Popup](./extension/icons/icon128.png)
 
 ## Features
 
