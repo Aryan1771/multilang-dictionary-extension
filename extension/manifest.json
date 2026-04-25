@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Dictionary Extension",
+  "version": "1.0",
+  "description": "Detect language and show word meanings.",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://api.dictionaryapi.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "open-dictionary": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D"
+      },
+      "description": "Open dictionary popup"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}
