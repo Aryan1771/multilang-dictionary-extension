@@ -8,13 +8,7 @@ A lightweight **multilingual dictionary browser extension** built with **Python,
 
 The extension popup provides a simple search box and displays the meaning, word type, and examples.
 
-![Dictionary Search Popup](./image.png)
-
-### Hover Definition Tooltip
-
-When the user moves the mouse over a word on a webpage, the extension shows a small tooltip with the word definition.
-
-![Hover Definition Tooltip](./image(1).png)
+![Dictionary Search Popup](./icon128.png)
 
 ## Features
 
