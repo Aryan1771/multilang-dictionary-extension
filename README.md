@@ -1,153 +1,102 @@
-# Multilang Dictionary Browser Extension
+# Multilang Dictionary Extension
 
-A lightweight **multilingual dictionary browser extension** built with **Python, JavaScript, and HTML**. It lets users search for word meanings from a popup interface and also shows instant definitions when the mouse hovers over words on a webpage.
-
-## Preview
-
-### Dictionary Search Popup
-
-The extension popup provides a simple search box and displays the meaning, word type, and examples.
-
-![Dictionary Search Popup](./extension/icons/icon128.png)
+Multilang Dictionary Extension is a Chrome Manifest V3 extension with a small Flask backend. The extension helps users look up word meanings from the browser through a popup, hover tooltip, keyboard shortcut, and context-menu action. The backend adds language detection support for multilingual text.
 
 ## Features
 
-- Search word meanings from the browser extension popup
-- Display definitions, parts of speech, and example usage
-- Hover over webpage words to see instant definitions
-- Supports multiple languages depending on dictionary API/data source
-- Clean and simple user interface
-- Built using browser extension technologies with a Python backend/helper
+- Chrome extension popup for searching word definitions
+- Hover tooltip that shows definitions for words on webpages
+- Right-click context menu for selected text
+- `Ctrl+Shift+D` shortcut to open the dictionary popup
+- Flask `/search` API that detects language and returns definitions
+- Support for language detection across English, Hindi, French, German, Spanish, Chinese, Japanese, Korean, Arabic, and more
 
 ## Tech Stack
 
-- **HTML** – popup structure and extension UI
-- **CSS** – styling for popup and tooltip
-- **JavaScript** – browser extension logic, DOM selection, hover detection, and API calls
-- **Python** – dictionary backend, local API, data processing, or dictionary lookup service
+- JavaScript
+- Chrome Extension Manifest V3
+- Python
+- Flask and Flask-CORS
+- DictionaryAPI
+- Lingua language detector
 
-## How It Works
+## Project Structure
 
-1. The user enters a word in the extension popup.
-2. JavaScript sends the word to the dictionary lookup logic or Python backend.
-3. The meaning is returned and displayed inside the popup.
-4. On normal webpages, the content script detects the word under the mouse pointer.
-5. The extension fetches the meaning and displays it in a small tooltip near the cursor.
+```text
+extension/
+  manifest.json         Chrome extension manifest
+  background.js         Context menu and command handling
+  content.js            Word hover tooltip on webpages
+  popup.html            Popup UI
+  popup.css             Popup styling
+  popup.js              Popup dictionary lookup logic
+  icons/                Extension icon assets
 
-## Installation
+server/
+  app.py                Flask API entry point
+  dictionary_api.py     DictionaryAPI integration
+  language_detect.py    Multilingual language detection
+  translate_utils.py    Translation helper module
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Aryan1771/multilang-dictionary-extension.git
-cd multilang-dictionary-extension
+requirements.txt        Python backend dependencies
 ```
 
-### 2. Install Python Dependencies
+## Backend Setup
 
-```bash
+Create a virtual environment and install dependencies:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-### 3. Run the Python
+Start the Flask backend:
 
-```bash
-python server/app.py
+```powershell
+python server\app.py
 ```
 
-Update the API URL in the JavaScript files if your backend uses a different port.
-
-### 4. Load the Extension in Browser
-
-For Chrome, Edge, Brave, or other Chromium-based browsers:
-
-1. Open `chrome://extensions/`
-2. Enable **Developer mode**
-3. Click **Load unpacked**
-4. Select the `extension/` folder
-5. Pin the extension and start using it
-
-## Usage
-
-### Search from Popup
-
-1. Click the extension icon.
-2. Type a word in the search box.
-3. Click **Search**.
-4. View the definition, part of speech, and examples.
-
-### Hover Definition
-
-1. Open any webpage.
-2. Move your mouse over a word.
-3. A tooltip appears with the word meaning.
-4. Move the mouse away to hide the tooltip.
-
-## Example
-
-Searching for `hello` may show:
+The backend runs at:
 
 ```text
-hello
-
-noun
-- "Hello!" or an equivalent greeting.
-
-verb
-- To greet with "hello".
-
-interjection
-- A greeting said when meeting someone or acknowledging someone's arrival.
+http://127.0.0.1:5000
 ```
 
-## Browser Permissions
+## Extension Setup
 
-The extension may require permissions such as:
+1. Open Chrome and go to `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked**.
+4. Select the `extension/` folder.
+5. Pin the extension and use the popup or select text on a webpage to look up a word.
 
-```json
+## API Example
+
+```http
+POST /search
+Content-Type: application/json
+
 {
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["<all_urls>"]
+  "word": "example"
 }
 ```
 
-These permissions allow the extension to read selected or hovered words on webpages and show definitions.
+Example response:
 
-## Possible APIs or Data Sources
+```json
+{
+  "detected_language": "english",
+  "definitions": [
+    "noun: a thing characteristic of its kind or illustrating a general rule"
+  ]
+}
+```
 
-You can connect the extension to:
+## Notes
 
-- A local Python dictionary database
-- A JSON dictionary file
-- A public dictionary API
-- A translation API for multilingual support
-- A custom Flask/FastAPI backend
-
-## Future Improvements
-
-- Add pronunciation audio
-- Add offline dictionary support
-- Add translation between languages
-- Add dark mode
-- Add word history
-- Add favorite/saved words
-- Improve tooltip positioning
-- Support keyboard shortcuts
-
-## Contributing
-
-Contributions are welcome.
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Commit your work
-5. Open a pull request
+The popup and hover tooltip currently call DictionaryAPI directly for English definitions. The Flask backend is available for language detection and server-side dictionary lookup workflows.
 
 ## License
 
-This project is licensed under the GNU GPL v3.0 License.
-
-## Author
-
-Created by **Aryan1771**.
+This repository is licensed under the GPL-3.0 license. See `LICENSE` for details.
